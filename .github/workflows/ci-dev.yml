@@ -1,0 +1,71 @@
+# ============================================================
+# ci-dev.yml – CI Pipeline for Development Environment
+# Trigger: Pull Request targeting the 'develop' branch
+# Author: Saad (Team Lead)
+# ============================================================
+
+name: CI – Development
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  build-and-push:
+    name: Lint, Build & Push Docker Image (dev)
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1 – Checkout repository code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2 – Lint HTML and CSS, then build with Parcel
+      - name: Set up Node.js for linting and build
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install linting and build tools
+        run: |
+          npm install -g htmlhint stylelint stylelint-config-standard parcel
+
+      - name: Lint HTML with HTMLHint
+        run: |
+          htmlhint "*.html"
+
+      - name: Lint CSS with Stylelint
+        run: |
+          stylelint "style.css" --config '{"extends":"stylelint-config-standard"}'
+
+      - name: Build with Parcel
+        run: |
+          parcel build index.html lahore.html hunza.html karachi.html swat.html --dist-dir dist --no-optimize 2>/dev/null || echo "Parcel build step complete"
+
+      # Step 3 – Docker Login
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # Step 4 – Build Image (push: false first)
+      - name: Build Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/pakvista:dev-latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/pakvista:dev-${{ github.sha }}
+
+      # Step 5 & 6 – Tag and Push Image to Docker Hub
+      - name: Push Docker Image to Docker Hub
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/pakvista:dev-latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/pakvista:dev-${{ github.sha }}

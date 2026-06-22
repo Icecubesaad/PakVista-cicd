@@ -1,0 +1,276 @@
+/* ============================================
+   PakVista – Shared Stylesheet
+   Author: Saad (Team Lead)
+   ============================================ */
+
+:root {
+  --color-primary:     #006400;
+  --color-secondary:   #ffffff;
+  --color-accent:      #c8a951;
+  --color-bg:          #f5f5f0;
+  --color-text:        #1a1a1a;
+  --color-nav-bg:      #004d00;
+  --color-nav-hover:   #c8a951;
+  --color-footer-bg:   #003300;
+  --color-border:      #ccc;
+  --color-placeholder-bg: #dde8dd;
+  --font-heading:      'Georgia', serif;
+  --font-body:         'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --max-width:         1100px;
+  --border-radius:     6px;
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+
+h1 { font-size: 2.2rem; }
+h2 { font-size: 1.7rem; }
+h3 { font-size: 1.3rem; }
+
+p {
+  margin-bottom: 1rem;
+  max-width: 75ch;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-nav-hover);
+  text-decoration: underline;
+}
+
+ul, ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+li {
+  margin-bottom: 0.3rem;
+}
+
+/* ── Navigation ── */
+.nav-bar {
+  background-color: var(--color-nav-bg);
+  padding: 0.8rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.nav-bar ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  max-width: var(--max-width);
+  margin-inline: auto;
+}
+
+.nav-bar ul li a {
+  color: var(--color-secondary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--border-radius);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-bar ul li a:hover {
+  background-color: var(--color-nav-hover);
+  color: var(--color-nav-bg);
+  text-decoration: none;
+}
+
+/* ── Layout ── */
+.container {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding: 1.5rem;
+}
+
+/* ── Hero Section ── */
+.hero {
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.hero h1 {
+  color: var(--color-secondary);
+  font-size: 2.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.hero p {
+  color: var(--color-secondary);
+  font-size: 1.1rem;
+  max-width: 60ch;
+  margin-inline: auto;
+}
+
+/* ── Sections ── */
+section {
+  margin-bottom: 2.5rem;
+}
+
+section h2 {
+  border-bottom: 3px solid var(--color-accent);
+  padding-bottom: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+/* ── Image Placeholder ── */
+.img-placeholder {
+  width: 100%;
+  max-width: 480px;
+  height: 220px;
+  background-color: var(--color-placeholder-bg);
+  border: 2px dashed var(--color-primary);
+  border-radius: var(--border-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+  padding: 1rem;
+  margin: 0.8rem 0;
+}
+
+figure {
+  margin-bottom: 1.5rem;
+}
+
+figcaption {
+  font-size: 0.88rem;
+  color: #555;
+  margin-top: 0.3rem;
+  font-style: italic;
+}
+
+/* ── Destination Cards on Home Page ── */
+.destination-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.2rem;
+  margin-top: 1.2rem;
+}
+
+.dest-card {
+  background-color: var(--color-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: 1.2rem;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.dest-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+.dest-card h3 {
+  margin-bottom: 0.5rem;
+}
+
+.dest-card a {
+  display: inline-block;
+  margin-top: 0.8rem;
+  padding: 0.4rem 1rem;
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.dest-card a:hover {
+  background-color: var(--color-accent);
+  color: var(--color-nav-bg);
+  text-decoration: none;
+}
+
+/* ── Tables ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+th, td {
+  border: 1px solid var(--color-border);
+  padding: 0.65rem 0.9rem;
+  text-align: left;
+}
+
+th {
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+}
+
+tr:nth-child(even) {
+  background-color: #eef3ee;
+}
+
+/* ── Footer ── */
+footer {
+  background-color: var(--color-footer-bg);
+  color: var(--color-secondary);
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: 3rem;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: var(--color-accent);
+}
+
+footer a:hover {
+  color: var(--color-secondary);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .nav-bar ul {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .destination-grid {
+    grid-template-columns: 1fr;
+  }
+}
